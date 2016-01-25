@@ -147,7 +147,7 @@ mcdb_findtagnext(struct mcdb * const restrict m,
             khash= *(uint32_t *)ptr; /* m->khash stored bigendian */
             vpos = uint32_strunpack_bigendian_aligned_macro(ptr+4);
             ptr  = mptr + vpos;
-            if (__builtin_expect((!vpos), 0))
+            if (!vpos)
                 break;
             ++m->loop;
             if (khash == m->khash) {
@@ -170,7 +170,7 @@ mcdb_findtagnext(struct mcdb * const restrict m,
             khash   = *(uint32_t *)ptr; /* m->khash stored bigendian */
             m->klen = uint32_strunpack_bigendian_aligned_macro(ptr+4);
             vpos    = uint64_strunpack_bigendian_aligned_macro(ptr+8);
-            if (__builtin_expect((!vpos), 0))
+            if (!vpos)
                 break;
             ++m->loop;
             if (khash == m->khash && m->klen == klen+(tagc!=0)) {
